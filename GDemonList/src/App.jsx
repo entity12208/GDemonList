@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+
+const demons = [
+  { id: 1, name: 'Acheron', creator: 'Ryamu', video: 'https://youtube.com/watch?v=xyz', position: 1 },
+  { id: 2, name: 'Slaughterhouse', creator: 'IcedCave', video: 'https://youtube.com/watch?v=abc', position: 2 },
+  { id: 3, name: 'Tartarus', creator: 'Dolphy', video: 'https://youtube.com/watch?v=def', position: 3 },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App" style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      <h1>🔥 GDemonList</h1>
+      <h2>Top 3 Demons</h2>
+      <ul>
+        {demons.map((demon) => (
+          <li key={demon.id} style={{ marginBottom: '1rem' }}>
+            <strong>#{demon.position}</strong> - {demon.name} by {demon.creator}
+            <br />
+            <a href={demon.video} target="_blank" rel="noreferrer">Watch</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
