@@ -1,27 +1,29 @@
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import DemonList from './pages/DemonList';
+import Leaderboard from './pages/Leaderboard';
+import SubmitRecord from './pages/SubmitRecord';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import AdminPanel from './pages/AdminPanel';
+import NotFound from './pages/NotFound';
+import { ProtectedRoute } from './auth/ProtectedRoute';
 
-const demons = [
-  { id: 1, name: 'Acheron', creator: 'Ryamu', video: 'https://youtube.com/watch?v=xyz', position: 1 },
-  { id: 2, name: 'Slaughterhouse', creator: 'IcedCave', video: 'https://youtube.com/watch?v=abc', position: 2 },
-  { id: 3, name: 'Tartarus', creator: 'Dolphy', video: 'https://youtube.com/watch?v=def', position: 3 },
-];
-
-function App() {
+export default function App() {
   return (
-    <div className="App" style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>🔥 GDemonList</h1>
-      <h2>Top 3 Demons</h2>
-      <ul>
-        {demons.map((demon) => (
-          <li key={demon.id} style={{ marginBottom: '1rem' }}>
-            <strong>#{demon.position}</strong> - {demon.name} by {demon.creator}
-            <br />
-            <a href={demon.video} target="_blank" rel="noreferrer">Watch</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/demonlist" element={<DemonList />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/submit" element={<SubmitRecord />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute adminOnly><AdminPanel /></ProtectedRoute>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
